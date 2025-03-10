@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "insta/auth/pkg/pb";
+
+service Auth{
+    rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc VerifyCode (VerifyCodeRequest) returns (VerifyCodeResponse);
+    rpc RefreshTokens(RefreshTokensRequest) returns (RefreshTokensResponse);
+    rpc LogOut (LogOutRequest) returns (LogOutResponse);
+    rpc GetMe (GetMeRequest) returns (GetMeResponse);
+}
+
+message RegisterRequest{
+    string email = 1; 
+    string password = 2; 
+}
+
+message RegisterResponse{
+    string signature = 1; 
+}
+
+message VerifyCodeRequest{
+    string code =1;
+    string signature = 2;
+}
+
+message VerifyCodeResponse{
+    Token access_token = 1;
+    Token refresh_token = 2;
+    User user = 3;    
+}
+
+message Token{
+    string data =1;
+    int64 expires_at= 2;
+}
+
+message User{
+    string id =1;
+    string email =2;
+    string password = 3;
+}
+
+
+message LoginRequest{
+    string email = 1;   
+    string password = 2;   
+   }
+
+   message LoginResponse{
+    Token access_token = 1;
+    Token refresh_token = 2;
+    User user = 3;    
+}
+
+message RefreshTokensRequest {
+    Token refresh_token = 1;
+    Token access_token = 2;
+}
+
+message RefreshTokensResponse {
+    Token access_token = 1;
+    Token refresh_token = 2;
+    User user = 3;    
+}
+
+message GetMeRequest{
+    Token access_token = 1;
+}
+
+message GetMeResponse{
+    User user = 1;
+}
+
+message LogOutRequest{
+    Token access_token = 1;
+}
+
+message LogOutResponse{
+    bool success = 1;
+}

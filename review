@@ -1,0 +1,4 @@
+- Makefile
+- pb.go - в гитигнор
+- odcker-compose с постгресом
+- protoc -I  ./auth/proto/auth --go_out=./auth/pkg/pb --go_opt=paths=source_relative --go-grpc_out=./auth/pkg/pb --go-grpc_opt=paths=source_relative ./auth/proto/auth/*.proto
