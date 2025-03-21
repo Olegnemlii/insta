@@ -20,6 +20,11 @@ type Config struct {
 	AccessTokenTTL      int
 	RefreshTokenTTL     int
 	DatabaseURL         string
+	VerificationConfig  VerificationConfig
+}
+
+type VerificationConfig struct {
+	CodeExpireTime int // заменить на time.Duration
 }
 
 var Cfg Config
